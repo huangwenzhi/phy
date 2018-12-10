@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/common/layui/css/layui.css">
+<link rel="stylesheet" href="/common/layui/css/layui_mend.css">
+<link rel='stylesheet' href='/common/css/bootstrap.min.css' id='poin_bootstrap'>
+<link rel='stylesheet' href='/common/css/poin-bootstrap-ext.css' id='poin_bootstrap_ext'>
+<link rel="stylesheet" href="/common/designCss/tansun.css">
+<script type="text/javascript" src="/common/designJs/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/common/layui/layui.js"></script>
+<script src='/common/js/jquery-1.12.4.min.js'></script>
+<script src='/common/js/bootstrap.min.js'></script>
+<script src='/common/js/poin-config.js'></script>
+<script src='/common/js/poin.bootstrap.min.js'></script>
+<script src="js/enterpriseInfo.js"></script>
+<!--[if lt IE 9]>
+<script src="/common/js/html5shiv-3.7.3.min.js"></script>
+<script src="/common/js/respond-1.4.2.min.js"></script>
+<![endif]-->
+<title>
+userCenter
+</title>
+<style>
+.laybody_pag,
+.adtable {
+width: 100%
+}
+input {
+border: 0
+}
+.btn{display:none}
+.div{display:none}
+</style>
+</head>
+<body class="poin-right-body" style="margin:0;padding:0">
+		<div class="body_user">
+			<!--通讯,2-->
+			<input poin type="hidden" id="FirmMsg" value="{'consume':'0','fileName':'firmMsg.json','method':'get','produce':'0','scheme':'{{schemes}}','uri':'/FirmMsg/searchFirmMsg'}">
+			<!--通讯,2-->
+		<!--通讯,3-->
+		<input poin type="hidden" id="firmMsgtols" value="{'consume':'0','fileName':'firmMsg.json','method':'get','produce':'0','scheme':'{{schemes}}','uri':'/FirmMsg/toIsGDFirmMsg'}">
+		<!--通讯,3-->
+		<!--通讯,4-->
+		<input poin type="hidden" id="firmMsgchange" value="{'consume':'0','fileName':'firmMsg.json','method':'get','produce':'0','scheme':'{{schemes}}','uri':'/FirmMsg/changeIsGDFirmMsg'}">
+		<!--通讯,4-->
+		<div class="posiuser">
+			<i class="iconhome">
+			</i>
+		企业信息
+		</div>
+		<!--表单,2-->
+			<form event-render="loadForm" poin role="form" target="_bank" accept="application/x-www-form-urlencoded" autocomplete="off" class="form-horizontal poin-form" data-loading="true" data-isToken="false" data-sign="false" id="departInfoForm" data-init="{'id':'FirmMsg','responseFields':{'address':'address','jurpername':'jurpername','busitype':'busitype','custmgrno':'custmgrno','createdate':'createdate','remark':'remark','customtype':'customtype','jurpertel':'jurpertel','customid':'customid','linkman':'linkman','linktel':'linktel','idtype':'idtype','efcustomid':'efcustomid','visadate':'visadate','lostdate':'lostdate','jurpertype':'jurpertype','instno':'instno','enterpriseId':'enterpriseId','modidate':'modidate','enterpriseName':'enterpriseName','jurpercode':'jurpercode'},'requestFields':{}}">
+				<div class="mag20">
+					<div class="laybody_pag">
+						基本信息
+					</div>
+					<div class="layui-form adtable mgtb50">
+					<div class="text-center">
+						<!--按钮,1-->
+						<button poin value="button" type="button" class="layui-btn btn" autocomplete="off"
+							id="btn" name="btn" onclick="btn1()">
+							更新为光大企业
+						</button>
+						<!--按钮,1-->
+						<div class="div" id="div">
+							<!--按钮,2-->
+							<button poin value="button" type="button" class="layui-btn" autocomplete="off"
+								onclick="Yes()">
+								确定
+							</button>
+							<!--按钮,2-->
+							<!--按钮,3-->
+							<button poin value="button" type="button" class="layui-btn" autocomplete="off"
+								onclick="NO()">
+								取消
+							</button>
+							<!--按钮,3-->
+						</div>
+					
+					</div>
+					
+					<div class="col_tr">
+						<div class="col4 text_right">
+						企业名称：
+						</div>
+						<div class="wd280 float_left">
+							<!--输入框,9-->
+							<input class="layui-input" event-render="loadText" poin autocomplete="off"
+								type="text" class="form-control" data-decimals="2" data-roundtag="ceil"
+								data-toggle="tooltip" data-placement="top" data-trigger="hover"
+								data-animation="false" data-delay="0" data-html="false" data-selector="false"
+								data-container="false" id="qiName" name="qiName" disabled>
+							<!--输入框,9-->
+						</div>
+					</div>
+					<div class="col_tr">
+							<div class="col4 text-right" id="idtype">
+								
+							</div>
+							<div class="wd280 " style="margin-left: 40%;">
+								<!--输入框,10-->
+								<input class="layui-input" event-render="loadText" poin autocomplete="off" type="text" class="form-control" data-decimals="2" data-roundtag="ceil" data-toggle="tooltip" data-placement="top" data-trigger="hover" data-animation="false" data-delay="0" data-html="false" data-selector="false" data-container="false" id="xinyong" disabled>
+								<!--输入框,10-->
+							</div>
+						</div>
+						<div class="col_tr">
+							<div class="col4 text_right">
+								 开户支行：
+							</div>
+							<div class="wd280 float_left">
+								<!--输入框,11-->
+								<input class="layui-input" event-render="loadText" poin autocomplete="off" type="text" class="form-control" data-decimals="2" data-roundtag="ceil" data-toggle="tooltip" data-placement="top" data-trigger="hover" data-animation="false" data-delay="0" data-html="false" data-selector="false" data-container="false" id="kaihu" disabled>
+								<!--输入框,11-->
+							</div>
+						</div>
+						<div class="col_tr">
+							<div class="col4 text_right">
+								 企业注册地址：
+							</div>
+							<div class="wd280 float_left">
+								<!--输入框,12-->
+								<input class="layui-input" event-render="loadText" poin autocomplete="off" type="text" class="form-control" data-decimals="2" data-roundtag="ceil" data-toggle="tooltip" data-placement="top" data-trigger="hover" data-animation="false" data-delay="0" data-html="false" data-selector="false" data-container="false" id="zhuce" disabled>
+								<!--输入框,12-->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mag20">
+					<div class="laybody_pag">
+						法人代表信息
+					</div>
+					<div class="layui-form adtable mgtb50">
+						<div class="col_tr">
+							<div class="col4 text_right">
+								 姓名：
+							</div>
+							<div class="wd280 float_left">
+								<!--输入框,13-->
+								<input class="layui-input" event-render="loadText" poin autocomplete="off" type="text" class="form-control" data-decimals="2" data-roundtag="ceil" data-toggle="tooltip" data-placement="top" data-trigger="hover" data-animation="false" data-delay="0" data-html="false" data-selector="false" data-container="false" id="Name" disabled>
+								<!--输入框,13-->
+							</div>
+						</div>
+						<div class="col_tr">
+							<div class="col4 text_right">
+								法人代表电话：
+							</div>
+							<div class="wd280 float_left">
+								<!--输入框,14-->
+								<input class="layui-input" event-render="loadText" poin autocomplete="off" type="text" class="form-control" data-decimals="2" data-roundtag="ceil" data-toggle="tooltip" data-placement="top" data-trigger="hover" data-animation="false" data-delay="0" data-html="false" data-selector="false" data-container="false" id="faPhone" disabled>
+								<!--输入框,14-->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mag20">
+					<div class="laybody_pag">
+						联系人信息
+					</div>
+					<div class="layui-form adtable mgtb50">
+						<div class="col_tr">
+							<div class="col4 text_right">
+								联系人姓名：
+							</div>
+							<div class="wd280 float_left">
+								<!--输入框,15-->
+								<input class="layui-input" event-render="loadText" poin autocomplete="off" type="text" class="form-control" data-decimals="2" data-roundtag="ceil" data-toggle="tooltip" data-placement="top" data-trigger="hover" data-animation="false" data-delay="0" data-html="false" data-selector="false" data-container="false" id="lianName" disabled>
+								<!--输入框,15-->
+							</div>
+						</div>
+						<div class="col_tr">
+							<div class="col4 text_right">
+								联系人电话：
+							</div>
+							<div class="wd280 float_left">
+								<!--输入框,16-->
+								<input class="layui-input" event-render="loadText" poin autocomplete="off" type="text" class="form-control" data-decimals="2" data-roundtag="ceil" data-toggle="tooltip" data-placement="top" data-trigger="hover" data-animation="false" data-delay="0" data-html="false" data-selector="false" data-container="false" id="lianPhone" disabled>
+								<!--输入框,16-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<!--表单,2-->
+		</div>
+		<script>
+		//取消按钮
+		function NO(){
+			window.opener="";
+  			window.open('','_self');
+  			window.close();
+		}
+			layui.use(['form', 'layedit', 'laydate', 'laypage', 'layer', 'element'], function() {
+				var laydate = layui.laydate;
+				laydate.render({
+					elem: '#test1,#test2',
+					theme: 'molv'
+				});
+			});
+			$(function() {
+				slidemenu(".drop-menu-effect");
+				//$('.layout_body').jScrollPane();
+			});
+
+			function slidemenu(_this) {
+				$(_this).each(function() {
+					var $this = $(this);
+					var theMenu = $this.find(".submenu");
+					var tarHeight = theMenu.height();
+					theMenu.css({
+						height: 0
+					});
+					$this.hover(
+						function() {
+							$(this).addClass("hover_menu");
+							theMenu.stop().show().animate({
+								height: tarHeight
+							}, 400);
+						},
+						function() {
+							$(this).removeClass("hover_menu");
+							theMenu.stop().animate({
+								height: 0
+							}, 400, function() {
+								$(this).css({
+									display: "none"
+								});
+							});
+						}
+					);
+				});
+			}
+		</script>
+
+	</body>
+
+</html>

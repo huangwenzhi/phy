@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/common/layui/css/layui.css">
+<link rel="stylesheet" href="/common/layui/css/layui_mend.css">
+<link rel='stylesheet' href='/common/css/bootstrap.min.css' id='poin_bootstrap'>
+<link rel='stylesheet' href='/common/css/bootstrap-table.min.css'>
+<link rel='stylesheet' href='/common/css/jquery.treegrid.min.css'>
+<link rel='stylesheet' href='/common/css/bootstrap-editable.css'>
+<link rel='stylesheet' href='/common/css/poin-bootstrap-ext.css' id='poin_bootstrap_ext'>
+<link rel="stylesheet" href="/common/designCss/tansun.css">
+<script type="text/javascript" src="/common/designJs/jquery-1.11.3.min.js"></script>
+<script src='/common/js/jquery-1.12.4.min.js'></script>
+<script src='/common/js/bootstrap.min.js'></script>
+<script src='/common/js/poin-config.js'></script>
+<script src='/common/js/poin.bootstrap.min.js'></script>
+<script src='/common/js/bootstrap-table.min.js'></script>
+<script src='/common/js/bootstrap-table-export.min.js'></script>
+<script src='/common/js/bootstrap-table-editable.min.js'></script>
+<script src='/common/js/tableExport.js'></script>
+<script src='/common/js/bootstrap-table-treegrid.js'></script>
+<script src='/common/js/jquery.treegrid.min.js'></script>
+<script src='/common/js/bootstrap-table-zh-CN.min.js'></script>
+<script type="text/javascript" src="/common/layui/layui.js"></script>
+<script type="text/javascript" src="/common/designJs/md5.js"></script>
+<script src="/common/encrypt/js/SecEdit.js"></script>
+<script src="js/personanInfo.js"></script>
+<!--[if lt IE 9]>
+<script src="/qqqqqqq/common/js/html5shiv-3.7.3.min.js"></script>
+<script src="/qqqqqqq/common/js/respond-1.4.2.min.js"></script>
+<![endif]-->
+<style>
+.warn {
+color: red;
+}
+.warn1 {
+color: red;
+}
+button {
+height: 31px!important;
+line-height: 22px!important;
+}
+input {
+height: 40px;
+border:1px solid #DADADA;
+}
+.input_bt {
+font-family: Microsoft Yahei, Arial, Helvetica, sans-serif;
+background: #ffffff;
+text-align: center;
+font-size: 13px;
+color: #666;
+border: solid 1px #DADADA;
+width: 19%;
+height: 32px;
+}
+.qyrz {
+display: none;
+}
+.btn_disable {
+background-color:#d4d4d4;/* 设置按钮背景颜色为灰色 */
+border-color:#d4d4d4;/* 边框线颜色应与背景颜色一致 */
+color:#fff;/* 设置字体颜色为白色 */
+}</style>
+<title>
+userCenter
+</title>
+</head>
+<body class="poin-right-body" style="margin:0;padding:0">
+		<!--total_content-->
+		<div class="body_user">
+			<!--通讯,17-->
+			<input poin type="hidden" id="updpwd" value="{'consume':'0','fileName':'userMsg.json','method':'post','produce':'0','scheme':'{{schemes}}','uri':'/userMsg/updPassword'}">
+			<!--通讯,17-->
+			<!--通讯,18-->
+			<input poin type="hidden" id="searchUserMsg" value="{'consume':'0','fileName':'userMsg.json','method':'get','produce':'0','scheme':'{{schemes}}','uri':'/userMsg/searchUserMsg'}">
+			<!--通讯,18-->
+			<!--通讯,19-->
+			<input poin type="hidden" id="validateNum" value="{'consume':'0','fileName':'userMsg.json','method':'get','produce':'0','scheme':'{{schemes}}','uri':'/userMsg/validateNum'}">
+			<!--通讯,19-->
+			<!--通讯,20-->
+			<input poin type="hidden" id="updPhone" value="{'consume':'0','fileName':'userMsg.json','method':'post','produce':'0','scheme':'{{schemes}}','uri':'/userMsg/updPhone'}">
+			<!--通讯,20-->
+			<!--通讯,21-->
+			<input poin type="hidden" id="ylxx" value="{'consume':'0','fileName':'userMsg.json','method':'post','produce':'0','scheme':'{{schemes}}','uri':'/userMsg/updylxx'}">
+			<!--通讯,21-->
+			<!--通讯,22-->
+			<input poin type="hidden" id="getBase64CodeAndPkey" value="{'consume':'0','fileName':'safeLogin.json','method':'get','produce':'0','scheme':'{{schemes}}','uri':'/safeLogin/getBase64CodeAndPublicKey'}">
+			<!--通讯,22-->
+		<div class="mag20">
+			<div id="Qyrz" class="qyrz" style="overflow: hidden;width: 89%;line-height: 30px;margin-left:9%;background: oldlace;margin-top: 1%;">
+				<div style="float:left;margin-left:3%">
+					<span style="color:red">
+					企业认证：未认证，
+					</span>
+					<a href="javascript:void(0)" style="color:blue" onclick="enterCerti()">
+					立即前往认证
+					</a>
+				</div>
+				<span id="guan" style="float: right;margin-right:2%;cursor:pointer;">
+				x
+				</span>
+			</div>
+			<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+				<ul class="layui-tab-title" style="position: absolute;left: 4%;background: #EFE7F2;width: 10%;height:100%;border:0;display:block;">
+					<li class="layui-this" style="border-radius: 10px;display:block;margin-buttom: 10%;background: #B4C7E7;">
+					个人信息
+					</li>
+					<li style="display:block;background: #B4C7E7;border-radius: 10px;margin-top: 15px;">
+					修改密码
+					</li>
+				</ul>
+				<div style="padding:0;width:100%;background:none" class="layui-tab-content">
+					<div class="layui-tab-item layui-show">
+						<div class="layui-form adtable mgtb50" style="border:0">
+							<!--表单,9-->
+							<form event-render="loadForm" poin role="form" target="_bank" accept="application/x-www-form-urlencoded"
+								autocomplete="off" class="form-horizontal poin-form" data-loading="false"
+								data-isToken="false" data-sign="false" id="UserForm">
+								<div class="col_tr" style="margin-left: 34%;width:50%">
+									<!--标签,3-->
+									<label poin class="control-label">
+									个人信息
+									</label>
+									<!--标签,3-->
+								</div>
+								<div class="col_tr">
+									<div class="col4 text_right">
+									用户账号：
+									</div>
+									<div class="wd280 float_left">
+										<!--输入框,24-->
+										<input event-render="loadText" poin autocomplete="off" type="text"
+											class="form-control" data-decimals="2" data-roundtag="ceil" data-toggle="tooltip"
+											data-placement="top" data-trigger="hover" data-animation="false"
+											data-delay="0" data-html="false" data-selector="false" data-container="false"
+											id="userMsg" class="layui-input" disabled>
+										<!--输入框,24-->
+									</div>
+									<div style="margin-bottom: 0px;" id="layerDemo" class="">
+										<a href="#" onclick="replace1()" style="padding: 30px;">
+										更换
+										</a>
+									</div>
+								</div>
+								<div class="col_tr">
+									<div class="col4 text_right">
+									用户姓名：
+									</div>
+									<div class="wd280 float_left">
+										<!--输入框,25-->
+										<input event-render="loadText" poin autocomplete="off" type="text"
+											class="form-control" data-decimals="2" data-roundtag="ceil" data-toggle="tooltip"
+											data-placement="top" data-trigger="hover" data-animation="false"
+											data-delay="0" data-html="false" data-selector="false" data-container="false"
+											id="UserName" class="layui-input" disabled>
+										<!--输入框,25-->
+									</div>
+								</div>
+								<div class="col_tr">
+									<div class="col4 text_right">
+									预留信息：
+									</div>
+									<div class="wd280 float_left">
+										<!--输入框,26-->
+										<input event-render="loadText" poin autocomplete="off" type="text"
+											class="form-control" data-decimals="2" data-roundtag="ceil" data-toggle="tooltip"
+											data-placement="top" data-trigger="hover" data-animation="false"
+											data-delay="0" data-html="false" data-selector="false" data-container="false"
+											id="YLXX" class="layui-input" disabled>
+										<!--输入框,26-->
+									</div>
+									<div style="margin-bottom: 0px;" id="layerDemo" class="">
+										<a href="#" onclick="replace2()" style="padding: 30px;">
+										更换
+										</a>
+									</div>
+								</div>
+								
+								<!--模态框,7-->
+								<div id="mol" name="mol" class="fade poin-eventModal modal">
+									<div class="modal-dialog">
+										<div class="modal-content poin-modal" style="margin-top:56px;">
+											<div class="modal-header">
+												<a id="guanbi" class="close" data-dismiss="modal">
+												×
+												</a>
+											</div>
+											<div class="modal-body">
+												<div>
+													<span class="">
+													新手机号码：
+													</span>
+													<!--输入框,27-->
+													<input event-render="loadText" poin placeholder="请输入手机号码" autocomplete="off"
+														type="text" class="form-con" data-decimals="2" data-roundtag="ceil"
+														data-toggle="tooltip" data-placement="top" data-trigger="hover"
+														data-animation="false" data-delay="0" data-html="false" data-selector="false"
+														data-container="false" onblur="changePhone()" id="phone" onfocus="PhoneFour()"
+														style="width: 45%;padding-left:8px;" maxlength="11">
+													<!--输入框,27-->
+													<span id="TipsPhone" class="warn">
+													</span>
+												</div>
+												<div style="height:40px;margin:10px 0;">
+													<div class="col4" style="width:-1%">
+														登录密码：
+													</div>
+													<div style="position:relative;width:257px;border:1px solid #DADADA;height:38px;line-height:38px;display:inline-flex;margin-left:-26%;">
+														<span class='glyphicon glyphicon-lock' style="margin:4% 4% 0 4%;float:left;"></span>
+									
+														<div id="SM2_Norma4"></div>
+														<div>
+															<div>
+																<input event-render="loadText" type="hidden" class="inputpass"  id="inputpass" placeholder="8-16位，数字、字母和符号至少两种" style="width:280px">
+															</div> 
+														</div>
+													</div>
+												</div>
+												<div style="margin-top:10px">
+													<!--输入框,28-->
+													<input event-render="loadText" poin placeholder="请输入手机验证码"
+														autocomplete="off" type="text" class="form-con" data-decimals="2"
+														data-roundtag="ceil" data-toggle="tooltip" data-placement="top"
+														data-trigger="hover" data-animation="false" data-delay="0"
+														data-html="false" data-selector="false" data-container="false"
+														onblur="CodeInp()" id="CodeInput" onfocus="CodeFour()" style="width:32%">
+													<!--输入框,28-->
+													<input value="获取验证码" poin="" type="button" class="input_bt btn-primary"
+														autocomplete="off" id="getCode" style="height:40px">
+													<span id="TipsCode" class="warn">
+													</span>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<div style="text-align:left;">
+													<div id="Tips" class="warn">
+													</div>
+													<!--按钮,28-->
+													<button poin value="button" type="button" class="btn-primary btn"
+														autocomplete="off" id="yes" name="yes" onclick="Qd()">
+													确认
+													</button>
+													<!--按钮,28-->
+													<!--按钮,29-->
+													<button poin value="button" type="button" class="btn-primary btn"
+														autocomplete="off" id="No" name="No" onclick="Close()">
+													取消
+													</button>
+													<!--按钮,29-->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--模态框,7-->
+								<!--模态框,8-->
+								<div id="updPhonemol" name="updPhonemol" class="fade poin-eventModal modal">
+									<div class="modal-dialog">
+										<div class="modal-content poin-modal" style="margin-top:56px;">
+											<div class="modal-body">
+												修改成功，请重新登录
+											</div>
+											<div class="modal-footer">
+												<div  class="text-right">
+													<!--按钮,30-->
+													<button poin value="button" type="button" class="btn-primary btn"
+														autocomplete="off" onclick="updPhoneyes()">
+													确认
+													</button>
+													<!--按钮,30-->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--模态框,8-->
+								<!--模态框,9-->
+								<div id="yuliuxinxi" class="fade poin-eventModal modal">
+									<div class="modal-dialog">
+										<div class="modal-content poin-modal" style="width:70%">
+											<div class="modal-header">
+												<span>修改预留信息</span>
+												<a class="close" data-dismiss="modal">
+												×
+												</a>
+											</div>
+											<div class="modal-body">
+												<span>
+													预留信息：
+													</span>
+												<input event-render="loadText" poin placeholder=""
+														autocomplete="off" type="text" class="form-con" data-decimals="2"
+														data-roundtag="ceil" data-toggle="tooltip" data-placement="top"
+														data-trigger="hover" data-animation="false" data-delay="0"
+														data-html="false" data-selector="false" data-container="false"
+														id="yuliu" style="width:70%;" onblur="ylxx1()">
+												<div class="text-center" style="margin-top:20px">
+												<!--按钮,31-->
+												<button poin value="button" type="button" class="btn-primary btn"
+													autocomplete="off" onclick="ylxxYes()">
+												确认
+												</button>
+												<!--按钮,31-->
+												<!--按钮,32-->
+												<button poin value="button" type="button" class="btn-primary btn"
+													autocomplete="off" onclick="ylxxNo()">
+												取消
+												</button>
+												<!--按钮,32-->
+												<div class="text-center">预留信息不能超过20个字符（一个汉字等于两个字符）</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--模态框,9-->
+							</form>
+							<!--表单,9-->
+						</div>
+					</div>
+					<!--模态框,10-->
+								<div id="updPwdmol" name="updPwdmol" class="fade poin-eventModal modal">
+									<div class="modal-dialog">
+										<div class="modal-content poin-modal" style="margin-top:56px;">
+											<div class="modal-body">
+												修改成功，请重新登录
+											</div>
+											<div class="modal-footer">
+												<div class="text-right">
+													<!--按钮,33-->
+													<button poin value="button" type="button" class="btn-primary btn"
+														autocomplete="off" onclick="updPwdYes()">
+													确认
+													</button>
+													<!--按钮,33-->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--模态框,10-->
+					<!--修改密码-->
+					<div class="layui-tab-item">
+						<div class="mag20">
+							<!--表单,10-->
+							<form event-render="loadForm" poin role="form" target="_bank" accept="application/x-www-form-urlencoded"
+								autocomplete="off" class="form-horizontal poin-form" data-loading="false"
+								data-isToken="false" data-sign="false" id="boxForm">
+								<div class="layui-form adtable mgtb50" style="border:0">
+									<div class="col_tr">
+										<div class="col4 text_right">
+										用户姓名：
+										</div>
+										<div class="wd280 float_left">
+											<input event-render="loadText" poin autocomplete="off" type="text"
+												class="form-control" data-decimals="2" data-roundtag="ceil"
+												data-toggle="tooltip" data-placement="top" data-trigger="hover"
+												data-animation="false" data-delay="0" data-html="false" data-selector="false"
+												data-container="false" id="userName" class="layui-input" disabled style="height:40px;">
+											
+										</div>
+									</div>
+									<div class="col_tr">
+										<div class="col4 text_right">
+											<i class="red_input">
+											*
+											</i>
+										旧密码：
+										</div>
+										<div class="float_left" style="position:relative;width:260px;border:1px solid #DADADA;height:38px;border-radius:5px;line-height:38px;display:inline-flex">
+											<span class='glyphicon glyphicon-lock' style="margin:4% 4% 0 4%;float:left;"></span>
+									
+											<div id="SM2_Norma3"></div>
+											<div>
+												<div>
+													<input event-render="loadText" type="hidden" class="inputpass"  id="inputpass" placeholder="8-16位，数字、字母和符号至少两种" style="width:280px">
+												</div> 
+											</div>
+										</div>
+									</div>
+									<div class="col_tr">
+										<div class="col4 text_right">
+											<i class="red_input">
+											*
+											</i>
+										新密码：
+										</div>
+										<div id="inp13" class="float_left" style="position:relative;width:260px;border:1px solid #DADADA;height:38px;border-radius:5px;line-height:38px;display:inline-flex">
+											<span class='glyphicon glyphicon-lock' style="margin:4% 4% 0 4%;float:left;"></span>
+											
+											<div id="SM2_Norma1"></div>
+											<div>
+												<div>
+												<input event-render="loadText" type="hidden" class="inputpass"  id="inputpass" placeholder="8-16位，数字、字母和符号至少两种" style="width:280px">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col_tr">
+										<div class="col4 text_right">
+											<i class="red_input">
+											*
+											</i>
+										确认密码：
+										</div>
+										<div class="float_left" style="position:relative;width:260px;border:1px solid #DADADA;height:38px;border-radius:5px;line-height:38px;display:inline-flex">
+											<span class='glyphicon glyphicon-lock' style="margin:4% 4% 0 4%;float:left;"></span>
+											<!--输入框,3-->
+											<div id="SM2_Norma2"></div>
+											<div>
+												<div>
+												<input event-render="loadText" type="hidden" class="inputpass"  id="inputpass" placeholder="8-16位，数字、字母和符号至少两种" style="width:280px">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col_tr">
+													
+													
+										<div class="col4 text_right">
+											<input value="获取验证码" poin="" type="button" class="input_bt btn-primary"
+														autocomplete="off" id="getPwdCode" style="height:40px;width:25%">
+										</div>
+										<div class="float_left col6" style="width:250px;border:1px solid #DADADA;height:40px;margin-left:10px">
+											<!--输入框,29-->
+											<input event-render="loadText" poin placeholder="请输入手机验证码"
+												autocomplete="off" type="text" class="form-con" data-decimals="2"
+												data-roundtag="ceil" data-toggle="tooltip" data-placement="top"
+												data-trigger="hover" data-animation="false" data-delay="0"
+												data-html="false" data-selector="false" data-container="false"
+												onblur="CodePwdInp()" onfocus="CodePwdFour()"
+												id="pwdCodeInput" style="border:0;height:40px;padding-left:10px;width:100%">
+											<!--输入框,29-->
+										</div>
+										<span id="TipsPwdCode" class="warn">
+										</span>
+										
+										
+									</div>
+									<div class="col_tr" style="text-align: center;">
+										<p style="text-align: center;" class="warn1">
+											温馨提示：密码必须为长度在8-16之间的数字、符号和字母，最少两种组合
+										</p>
+										<!--按钮,34-->
+										<button poin value="button" type="button" class="btn-primary btn"
+											autocomplete="off" id="keep" onclick="updpwdYes()">
+										保存
+										</button>
+										<!--按钮,34-->
+									</div>
+								</div>
+							</form>
+							<!--表单,10-->
+						</div>
+					</div>
+				</div>
+			</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+	
+//-----------------------------预留信息------------------------------
+//预留信息  点击更换按钮弹出模态框
+function replace2(){
+	$("#yuliuxinxi").modal("show");
+}
+//预留信息确认按钮
+var yuliu;
+function ylxxYes(){
+	yuliu = $("#yuliu").val();
+	var myreg = /^[A-Za-z0-9\u4e00-\u9fa5]+$/;
+	var len = yuliu.replace(/[\u4E00-\u9FA5]/g,'aa').length;
+	if(!myreg.test(yuliu)){
+		top.window.Dialog.alert("预留信息格式不正确");
+	}else if(len>20){
+		top.window.Dialog.alert("预留信息输入的长度不能超过20个字符");
+	}else{
+		messageManage({
+			'id' : 'ylxx',
+			'requestFields' : {
+			},
+			'responseFields' : {
+				"resp_status": "resp_status",
+				"resp_msg": "resp_msg"
+			}
+		}, afterylxx, beforeylxx);
+	}
+}
+		
+function beforeylxx(messageObj) {
+	messageObj.setData({
+		"ylxx": yuliu,
+	});
+}
+function afterylxx(responseData, messageObj, status){
+	if(status == "success"){//系统后台联通
+		var resp_status = responseData.resp_status;
+		if(resp_status == "AAAAAAA") {
+			top.window.Dialog.alert("修改成功");
+			$("#yuliuxinxi").modal("hide");
+			window.location.reload();
+		} else {
+			var resp_msg = responseData.resp_msg;
+			top.window.Dialog.alert(resp_msg);
+		}
+	}else{
+		top.window.Dialog.alert("通讯失败！");
+	}	
+}
+//预留信息取消按钮
+function ylxxNo(){
+	$("#yuliuxinxi").modal("hide");
+}
+function ylxx1(){
+	
+}
+		
+//-----------------------------预留信息结束------------------------------
+//-----------------------------修改密码------------------------------
+			//旧密码文本框事件
+	/*		function jiuPassword() {
+				var pwd = $('#myPassword')
+				var pwdReg = /((?=.*\d)(?=.*\D)|(?=.*[a-zA-Z])(?=.*[^a-zA-Z]))(?!^.*[\u4E00-\u9FA5].*$)^\S{8,16}$/; //8到16位数字与字母组合
+				var val = $('#myPassword').val();
+				if(val == "") {
+					$("#pwd").html("不能为空")
+				} else if(pwd.val().length > 16) {
+					$("#pwd").html("密码位数不能大于16位")
+				} else if(pwd.val().length < 8){
+					$("#pwd").html("密码位数不能小于8位")
+				}else if(!pwdReg.test(val)) {
+					$("#pwd").html("密码格式不正确!")
+				}
+			}
+
+			function myPwd() {
+				$("#pwd").html("")
+				$(".tishi").html("")
+			}
+			//新密码文本框事件
+			function xinPassword() {
+				var pwd = $('#myPassword1')
+				var pwdReg = /((?=.*\d)(?=.*\D)|(?=.*[a-zA-Z])(?=.*[^a-zA-Z]))(?!^.*[\u4E00-\u9FA5].*$)^\S{8,16}$/; //8到16位数字与字母组合
+				var val = $('#myPassword1').val();
+				if(val == "") {
+					$("#pwd1").html("不能为空")
+				} else if(pwd.val().length > 16) {
+					$("#pwd1").html("密码位数不能大于16位")
+				} else if(pwd.val().length < 8){
+					$("#pwd1").html("密码位数不能小于8位")
+				}else if(!pwdReg.test(val)) {
+					$("#pwd1").html("密码格式不正确!")
+				}
+			}
+
+			function myPwd1() {
+				$("#pwd1").html("")
+				$(".tishi").html("")
+			}
+			//确认密码文本框事件
+			function quePassword() {
+				var pwd = $('#myPassword2')
+				var pwdReg = /((?=.*\d)(?=.*\D)|(?=.*[a-zA-Z])(?=.*[^a-zA-Z]))(?!^.*[\u4E00-\u9FA5].*$)^\S{8,16}$/; //8到16位数字与字母组合
+				var val = $('#myPassword2').val();
+				if(val == "") {
+					$("#pwd2").html("不能为空")
+				} else if(pwd.val().length > 16) {
+					$("#pwd2").html("密码位数不能大于16位")
+				} else if(pwd.val().length < 8){
+					$("#pwd2").html("密码位数不能小于8位")
+				}else if(!pwdReg.test(val)) {
+					$("#pwd2").html("密码格式不正确!")
+				}
+			}
+
+			function myPwd2() {
+				$("#pwd2").html("")
+				$(".tishi").html("")
+			}
+			//保存按钮事件
+			function updpwdYes() {
+				var myPassword = $('#myPassword').val(); //旧密码
+				var myPassword1 = $('#myPassword1').val(); //新密码
+				var myPassword2 = $('#myPassword2').val(); //确认密码
+				var userName = $("#userName").val();
+				var pwdReg = /((?=.*\d)(?=.*\D)|(?=.*[a-zA-Z])(?=.*[^a-zA-Z]))(?!^.*[\u4E00-\u9FA5].*$)^\S{8,16}$/; //8到16位数字与字母组合
+				if(!pwdReg.test(myPassword)){
+					top.window.Dialog.alert("旧密码格式不正确");
+				}else if(!pwdReg.test(myPassword1)){
+					top.window.Dialog.alert("新密码格式不正确");
+				}else if(!pwdReg.test(myPassword2)){
+					top.window.Dialog.alert("确认密码格式不正确");
+				}else if(myPassword1 != myPassword2) {
+					//$(".tishi").html("两次新密码不一致,请重新输入");
+					top.window.Dialog.alert("两次新密码不一致,请重新输入");
+				}else if(myPassword == "" || myPassword1 == "" || myPassword2 == "") {
+					//$(".tishi").html("请输入对应的密码项")
+					top.window.Dialog.alert("请输入对应的密码项");
+				}else if(myPassword==myPassword1){
+					//$(".tishi").html("新密码不能与旧密码相同")
+					top.window.Dialog.alert("新密码不能与旧密码相同");
+				}else if(myPassword.length>16 || myPassword1.length>16 || myPassword2.length>16){
+					//$(".tishi").html("密码位数不能大于16位")
+					top.window.Dialog.alert("密码位数不能大于16位");
+				}else if(myPassword.length<8 || myPassword1.length<8 || myPassword2.length<8){
+					//$(".tishi").html("密码位数不能小于8位")
+					top.window.Dialog.alert("密码位数不能小于8位");
+				}else{
+					messageManage({
+						'id': 'updpwd',
+						'requestFields': {
+							'password':'#myPassword',
+							'newpw':'#myPassword1'
+						},
+						'responseFields': {
+							"resp_status": "resp_status",
+							"resp_msg": "resp_msg"
+						}
+					}, updpwdafter, updpwdbefore);
+					 // 设置禁用效果，不再响应点击事件
+        				$("#keep").attr({"disabled":"disabled"});
+        				// 设置样式
+        				$("#keep").addClass("btn_disable");
+				}
+			}
+			//修改成功执行
+			function updpwdafter(responseData, messageObj, status) {
+				if(status == "success") {
+					var resp_status = responseData.resp_status;
+					//修改成功执行
+					if(resp_status == "AAAAAAA") { 
+						$("#keep").attr("disabled", false); //启用按钮  
+						$("#keep").removeClass("btn_disable");//将class移除
+						//top.window.Dialog.alert("修改成功，请重新登录");
+						top.window.location.href=("../../../login.html");
+						//window.open("https://114.255.114.194:12443/login.html");
+					} else {
+					//修改失败执行
+						var resp_msg = responseData.resp_msg;
+						top.window.Dialog.alert(resp_msg);
+						$("#keep").attr("disabled", false); //启用按钮  
+						$("#keep").removeClass("btn_disable");//将class移除
+					}
+				}else{
+					top.window.Dialog.alert("通讯错误。");
+					$("#keep").attr("disabled", false); //启用按钮  
+					$("#keep").removeClass("btn_disable");//将class移除
+				}
+			}
+			function updpwdbefore(messageObj) {
+				messageObj.formSerializeAndSetData($("#boxForm"));
+			}
+			//重置按扭事件
+			function updataNo() {
+				$('#myPassword').val("");
+				$('#myPassword1').val("");
+				$('#myPassword2').val("");
+			}**/
+//-----------------------------修改密码结束------------------------------
+//-----------------------------个人信息修改手机号------------------------------
+	//点击更换按钮弹出更换手机号码框   
+	
+function replace1() {
+	$("#mol").modal("show");
+}
+//手机号文本框失焦事件
+function changePhone() {
+	var phonenumber = $("#phone").val();　　 //    获取输入框内容
+	function isPoneAvailable(phoneInput) {　　
+		var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+		if(phonenumber == "") {
+			$("#TipsPhone").html("请输入手机号");
+		} else if(!myreg.test(phonenumber)) {　　
+			$("#TipsPhone").html("手机号码格式不正确");　　
+			return false;　　
+		}
+	}　　
+	isPoneAvailable();
+}
+//获取验证码按钮事件
+$('#getCode').click(function() {
+	var $this = $(this);
+	var count = 60;
+	var Phone = $("#phone").val(); //手机号码  
+	var reg_phone = /^[1][3,4,5,7,8][0-9]{9}$/;
+	var userMsg = $('#userMsg').val();
+	if(Phone == userMsg) {
+		top.window.Dialog.alert("不能更换原手机号");
+	} else if(Phone == "") {
+		top.window.Dialog.alert("请填写手机号");
+	} else if(!reg_phone.test(Phone)) { //验证手机是否符合格式
+		top.window.Dialog.alert("手机号码格式不正确");
+	} else {
+	//开始计时  
+		$this.attr('disabled', 'disabled');
+		$this.val(count + "秒后可重新获取");
+		var timer;
+		timer = setInterval(function() {
+			count--;
+			$this.val(count + "秒后可重新获取");
+			if(count == 0) {
+				clearInterval(timer);
+				$this.attr("disabled", false); //启用按钮  
+				$this.val("获取验证码");
+			}
+		}, 1000);
+		//向系统后台传递手机号
+		messageManage({
+			'id': '',
+			'requestFields': {
+				
+			},
+			'responseFields': {
+				"resp_status": "resp_status",
+				"resp_msg": "resp_msg"
+			}
+		}, afterSend,beforeSend);
+		
+	}
+})
+function beforeSend(messageObj){
+	messageObj.addRequestParam({
+		"type": "4"
+	})
+}
+//后台发送验证码后的操作
+function afterSend(responseData, messageObj, status) {
+	//得到系统后台返回状态值
+	if(status == "success") { //系统后台联通
+		var resp_status = responseData.resp_status;
+		if(resp_status == "AAAAAAA") {
+			top.window.Dialog.alert("验证码已发送，请注意查收。");
+		} else {
+			var resp_msg = responseData.resp_msg;
+			top.window.Dialog.alert(resp_msg);
+		}
+	} else {
+		top.window.Dialog.alert("通讯错误！");
+	}
+}
+//验证码文本框失焦事件
+function CodeInp() {
+	var CodeInput = $("#CodeInput").val()
+	if(CodeInput.length <= 0) { //若输入的验证码长度为0   
+		$("#TipsCode").html("请输入验证码") //则弹出请输入验证码   
+	} else if(CodeInput.length > 6 || CodeInput.length < 6) {
+		$("#TipsCode").html("验证码位数不正确")
+	}
+}
+//手机号文本框获得焦点
+function PhoneFour() {
+	$("#TipsPhone").html("")
+	$("#Tips").html("");
+}
+//验证码输入框获得焦点
+function CodeFour() {
+	$("#TipsCode").html("")
+	$("#Tips").html("");
+}
+
+//个人信息更换手机号码框-确认按钮事件
+var value44;
+var	clientRandom4;
+var Phone1;
+var codeInput;
+var jmPhoneNum;
+function Qd() {
+	var isInstalled4=secedit.prototype.checkIsInstalled("old_pwd").val;
+	if(!isInstalled4){
+		alert("加载安全控件4失败");
+		return;
+	};
+	//校验长度
+	var passlength4= secedit.prototype.getLengthIntensity("old_pwd").val;
+	if(!passlength4){
+		alert("密码长度不符合规则，密码长度为8-16位");
+		return;
+	}
+	//密码检测
+	var passIsGood4= secedit.prototype.getComplexIntensity("old_pwd").val;
+	if(!passIsGood4){
+		alert("密码不符合规则,数字字母组合为必填项,符号选填")
+		return;
+	};
+	value44 = secedit.prototype.getValue("old_pwd").val;
+	clientRandom4=secedit.prototype.getClientRandom("old_pwd").val;
+	Phone1 = $("#phone").val();//手机号输入框的值
+	codeInput = $("#CodeInput").val();//验证码输入框的值
+	var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+	jmPhoneNum = $.md5(Phone1);//md5手机号加密
+	if(Phone1 == "" || codeInput == "") {
+		//$("#Tips").html("请输入对应的内容")
+		top.window.Dialog.alert("请输入对应的内容");
+	} else if(!myreg.test(Phone1)) {
+		//$("#Tips").html("手机号格式错误！")
+		top.window.Dialog.alert("手机号格式错误");
+	} else if(codeInput.length > 6 || codeInput.length < 6) {
+		//$("#Tips").html("验证码输入位数不正确")
+		top.window.Dialog.alert("验证码输入位数不正确");
+	} else {
+		messageManage({
+			'id': 'updPhone',
+			'requestFields': {
+				
+			},
+			'responseFields': {
+				"resp_status": "resp_status",
+				"resp_msg": "resp_msg"
+			}
+		}, afterGetCode,beforeGetCode);
+		 // 设置禁用效果，不再响应点击事件
+			$("#yes").attr({"disabled":"disabled"});
+			// 设置样式
+			$("#yes").addClass("btn_disable");
+	}
+}
+
+function beforeGetCode(messageObj){
+	messageObj.setData({
+		"password":value44,
+		"crpassword":clientRandom4,
+		"base64Encode":base64Encode,
+		"serialno":jmPhoneNum,
+		"username": Phone1,
+		"verificationcode": codeInput
+   	}); 	
+}
+function afterGetCode(responseData, messageObj, status) {
+	if(status == "success") {
+		var resp_status = responseData.resp_status;
+		//修改成功执行
+		if(resp_status == "AAAAAAA") {
+			$("#mol").modal("hide");
+			$("#updPhonemol").modal("show")
+			//top.window.Dialog.alert("修改成功,请重新登录");
+			//top.window.location.href = ("../../../login.html");
+			$("#yes").attr("disabled", false); //启用按钮  
+			$("#yes").removeClass("btn_disable");//将class移除
+			return;
+		} else {
+			var resp_msg = responseData.resp_msg;
+			top.window.Dialog.alert(resp_msg);
+			$("#yes").attr("disabled", false); //启用按钮  
+			$("#yes").removeClass("btn_disable");//将class移除
+		}
+	} else {
+		top.window.Dialog.alert("通讯错误");
+		$("#yes").attr("disabled", false); //启用按钮  
+		$("#yes").removeClass("btn_disable");
+	}
+}
+function updPhoneyes(){
+	top.window.location.href = ("../../../login.html");
+}
+// 个人信息更换手机号码框取消按钮事件
+function Close() {
+	$("#mol").modal("hide");
+	$(".warn").html("");
+	$("#CodeInput").val("")
+	$("#phone").val("");
+}
+//点击关闭按钮清空提示内容和输入框的内容
+$("#guanbi").on('click',function(){
+	$(".warn").html("")
+	$("#CodeInput").val("")
+	$("#phone").val("");
+})
+$("#guan").on('click',function(){
+	$("#Qyrz").hide()
+})
+	//-----------------------------个人信息------------------------------	
+	
+
+//修改密码   获取验证码
+$('#getPwdCode').on('click',function() {
+var count = 60;
+	var $this = $(this);
+	//开始计时  
+	$this.attr('disabled', 'disabled');
+	$this.val(count + "秒后可重新获取");
+	var timer;
+	timer = setInterval(function() {
+		count--;
+		$this.val(count + "秒后可重新获取");
+		if(count == 0) {
+			clearInterval(timer);
+			$this.attr("disabled", false); //启用按钮  
+			$this.val("获取验证码");
+		}
+	}, 1000);
+	//向系统后台传递手机号
+	messageManage({
+		'id': 'validateNum',
+		'requestFields': {
+		},
+		'responseFields': {
+			"resp_status": "resp_status",
+			"resp_msg": "resp_msg"
+		}
+	}, afterdx,beforedx);
+})
+function beforedx(messageObj){
+	messageObj.addRequestParam({
+		"type": "2"
+	})
+}
+//后台发送验证码后的操作
+function afterdx(responseData, messageObj, status) {
+	//得到系统后台返回状态值
+	if(status == "success") { //系统后台联通
+		var resp_status = responseData.resp_status;
+		if(resp_status == "AAAAAAA") {
+			top.window.Dialog.alert("验证码已发送，请注意查收。");
+		} else {
+			var resp_msg = responseData.resp_msg;
+			top.window.Dialog.alert(resp_msg);
+		}
+	} else {
+		top.window.Dialog.alert("通讯错误！");
+	}
+}		
+//验证码文本框失焦事件
+function CodePwdInp() {
+	var CodeInput = $("#pwdCodeInput").val()
+	if(CodeInput.length <= 0) { //若输入的验证码长度为0   
+		$("#TipsPwdCode").html("请输入验证码") //则弹出请输入验证码   
+	} else if(CodeInput.length > 6 || CodeInput.length < 6) {
+		$("#TipsPwdCode").html("验证码位数不正确")
+	}
+}
+//验证码输入框获得焦点
+function CodePwdFour() {
+	$("#TipsPwdCode").html("")
+}
+
+
+			layui.use('element', function() {
+				var $ = layui.jquery,
+					element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+				//触发事件
+				var active = {
+					tabAdd: function() {
+						//新增一个Tab项
+						element.tabAdd('demo', {
+							title: '新选项' + (Math.random() * 1000 | 0) //用于演示
+								,
+							content: '内容' + (Math.random() * 1000 | 0),
+							id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+						})
+					},
+					tabDelete: function(othis) {
+						//删除指定Tab项
+						element.tabDelete('demo', '44'); //删除："商品管理"
+
+						othis.addClass('layui-btn-disabled');
+					},
+					tabChange: function() {
+						//切换到指定Tab项
+						element.tabChange('demo', '22'); //切换到：用户管理
+					}
+				};
+
+				$('.site-demo-active').on('click', function() {
+					var othis = $(this),
+						type = othis.data('type');
+					active[type] ? active[type].call(this, othis) : '';
+				});
+
+				//Hash地址的定位
+				var layid = location.hash.replace(/^#test=/, '');
+				element.tabChange('test', layid);
+
+				element.on('tab(test)', function(elem) {
+					location.hash = 'test=' + $(this).attr('lay-id');
+				});
+			});
+		</script>
+
+	</body>
+
+</html>

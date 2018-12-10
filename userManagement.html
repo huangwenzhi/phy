@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/common/layui/css/layui.css">
+<link rel="stylesheet" href="/common/layui/css/layui_mend.css">
+<link rel='stylesheet' href='/common/css/bootstrap.min.css' id='poin_bootstrap'>
+<link rel='stylesheet' href='/common/css/bootstrap-table.min.css'>
+<link rel='stylesheet' href='/common/css/jquery.treegrid.min.css'>
+<link rel='stylesheet' href='/common/css/bootstrap-editable.css'>
+<link rel='stylesheet' href='/common/css/poin-bootstrap-ext.css' id='poin_bootstrap_ext'>
+<link rel="stylesheet" href="/common/designCss/tansun.css">
+<script type="text/javascript" src="/common/designJs/jquery-1.11.3.min.js"></script>
+<script src='/common/js/jquery-1.12.4.min.js'></script>
+<script src='/common/js/bootstrap.min.js'></script>
+<script src='/common/js/poin-config.js'></script>
+<script src='/common/js/poin.bootstrap.min.js'></script>
+<script src='/common/js/bootstrap-table.min.js'></script>
+<script src='/common/js/bootstrap-table-export.min.js'></script>
+<script src='/common/js/bootstrap-table-editable.min.js'></script>
+<script src='/common/js/tableExport.js'></script>
+<script src='/common/js/bootstrap-table-treegrid.js'></script>
+<script src='/common/js/jquery.treegrid.min.js'></script>
+<script src='/common/js/bootstrap-table-zh-CN.min.js'></script>
+<script type="text/javascript" src="/common/layui/layui.js"></script>
+<script type="text/javascript" src="/common/designJs/md5.js"></script>
+<script src="js/userManagement.js"></script>
+<!--[if lt IE 9]>
+<script src="/qqqqqqq/common/js/html5shiv-3.7.3.min.js"></script>
+<script src="/qqqqqqq/common/js/respond-1.4.2.min.js"></script>
+<![endif]-->
+<title>
+userManagement
+</title>
+<style>
+.warn {
+color: red;
+}
+input{
+height:30px;
+}
+button{
+height:31px!important;
+line-height:22px!important;
+}
+.btn_disable {
+    background-color:#d4d4d4;/* 设置按钮背景颜色为灰色 */
+    border-color:#d4d4d4;/* 边框线颜色应与背景颜色一致 */
+    color:#fff;/* 设置字体颜色为白色 */
+}
+</style>
+</head>
+<body class="poin-right-body" style="margin:0;padding:0">
+		<div class="body_user">
+		<!--通讯,33-->
+		<input poin type="hidden" id="UserManage" value="{'consume':'0','fileName':'userManage.json','method':'get','produce':'0','scheme':'{{schemes}}','uri':'/UserManage/selGetUserMsgManagerAllList'}">
+		<!--通讯,33-->
+		<!--通讯,34-->
+		<input poin type="hidden" id="addManage" value="{'consume':'0','fileName':'userManage.json','method':'post','produce':'0','scheme':'{{schemes}}','uri':'/UserManage/addUserMsg'}">
+		<!--通讯,34-->
+		<!--通讯,35-->
+		<input poin type="hidden" id="delManage" value="{'consume':'0','fileName':'userManage.json','method':'post','produce':'0','scheme':'{{schemes}}','uri':'/UserManage/delUserMsg'}">
+		<!--通讯,35-->
+		<!--通讯,36-->
+		<input poin type="hidden" id="updataManage" value="{'consume':'0','fileName':'userManage.json','method':'post','produce':'0','scheme':'{{schemes}}','uri':'/UserManage/updUserMsg'}">
+		<!--通讯,36-->
+		<!--通讯,37-->
+		<input poin type="hidden" id="useUk" value="{'consume':'0','fileName':'userManage.json','method':'post','produce':'0','scheme':'{{schemes}}','uri':'/UserManage/useUK'}">
+		<!--通讯,37-->
+		<!--通讯,38-->
+		<input poin type="hidden" id="canceUk" value="{'consume':'0','fileName':'userManage.json','method':'post','produce':'0','scheme':'{{schemes}}','uri':'/UserManage/cancelUK'}">
+		<!--通讯,38-->
+		<!--通讯,39-->
+		<input poin type="hidden" id="serchManange" value="{'consume':'0','fileName':'userManage.json','method':'get','produce':'0','scheme':'{{schemes}}','uri':'/UserManage/searchUserManage'}">
+		<!--通讯,39-->
+		<!--通讯,40-->
+		<input poin type="hidden" id="sendPassword" value="{'consume':'0','fileName':'userManage.json','method':'post','produce':'0','scheme':'{{schemes}}','uri':'/UserManage/sendPassword'}">
+		<!--通讯,40-->
+		
+		<!--通讯,41-->
+		<input poin type="hidden" id="cebUkeyCheck" value="{'consume':'0','fileName':'EnterpriseRegister.json','method':'post','produce':'0','scheme':'{{schemes}}','uri':'/EnterpriseRegister/cebUkeyCheck'}">
+		<!--通讯,41-->
+		<!--通讯,42-->
+		<input poin type="hidden" id="UkeyVer" value="{'consume':'0','fileName':'EnterpriseRegister.json','method':'post','produce':'0','scheme':'{{schemes}}','uri':'/EnterpriseRegister/UkeyVer'}">
+		<!--通讯,42-->
+		<!--通讯,43-->
+		<input poin type="hidden" id="nextRegister" value="{'consume':'0','fileName':'EnterpriseRegister.json','method':'get','produce':'0','scheme':'{{schemes}}','uri':'/EnterpriseRegister/hadRegister'}">
+		<!--通讯,43-->
+		<!--通讯,44-->
+		<input poin type="hidden" id="UkeyEnterpriseRegister" value="{'consume':'0','fileName':'EnterpriseRegister.json','method':'post','produce':'0','scheme':'{{schemes}}','uri':'/EnterpriseRegister/UkeyEnterpriseRegister'}">
+		<!--通讯,44-->
+		<div class="mag20">
+			<div class="posiuser">
+				<i class="iconhome">
+				</i>
+			用户管理
+			</div>
+			<div class="button_contain" style="width: 100%;">
+				<!--按钮,41-->
+				<button poin value="button" type="button" class="layui-btn" autocomplete="off"
+					onclick="add()">
+					<span class="glyphicon glyphicon-plus">
+					</span>
+				新增
+				</button>
+				<!--按钮,41-->
+				<!--按钮,42-->
+				<button poin value="button" type="button" class="layui-btn" autocomplete="off"
+					onclick="updateTab()" id="updateTab" name="updateTab">
+					<span class="glyphicon glyphicon-pencil">
+					</span>
+				修改
+				</button>
+				<!--按钮,42-->
+				<!--按钮,43-->
+				<button poin value="button" type="button" class="layui-btn" autocomplete="off"
+					id="del" name="del" onclick="delTable()">
+					<span class="glyphicon glyphicon-trash">
+					</span>
+				删除
+				</button>
+				<!--按钮,43-->
+				<!--按钮,44-->
+				<button poin value="button" type="button" class="layui-btn" autocomplete="off"
+					onclick="SendPwd()" id="sedpwd">
+				发送首次登录密码
+				</button>
+				<!--按钮,44-->
+				<!--按钮,45-->
+				<button poin value="button" type="button" class="layui-btn" autocomplete="off"
+					onclick="binding()" id="BDAN">
+				绑定
+				</button>
+				<!--按钮,45-->
+				<!--按钮,46-->
+				<button poin value="button" type="button" class="layui-btn" autocomplete="off"
+					onclick="Untie()" id="JBAN">
+				解绑
+				</button>
+				<!--按钮,46-->
+			</div>
+			<!--表格,5-->
+			<table class="layui-table" event-render="loadGrid" data-toggle="table"
+				id="tab" name="tab" data-method="get" data-toolbar-align="left" data-pagination="true"
+				data-pagination-loop="false" data-side-pagination="server" data-page-size="10"
+				data-page-to-pagination="true" data-pagination-loop="false" data-show-refresh="false"
+				data-single-select="false" data-show-columns="false" data-click-to-select="false"
+				data-detail-view="false" data-show-export="false" data-search="false"
+				data-search-align="right" data-init="{'id':'UserManage','responseFields':{'search':'search','total':'total','offset':'offset','limit':'limit','sort':'sort','rows':{'passwordstatus':'passwordstatus','city':'city','loginstatus':'loginstatus','createdate':'createdate','idcardno':'idcardno','loginnum':'loginnum','customid':'customid','parentId':'parentId','registercauthority':'registercauthority','password':'password','registercity':'registercity','usernameManage':'usernameManage','newUserName':'newUserName','name':'name','tmusername':'tmusername','ukserno':'ukserno','ukstatus':'ukstatus','id':'id','enterpriseId':'enterpriseId','modidate':'modidate','username':'username','enterpriname':'enterpriname'},'order':'order'},'requestFields':{'usernameManage':'usernameManage','offset':'offset','limit':'limit'}}"
+				data-pagination-detail-h-align="left" data-pagination-h-align="right"
+				data-pagination-pre-text="上一页" data-pagination-next-text="下一页" data-url="#">
+				<thead>
+					<tr>
+						<!--列,32-->
+						<th data-field="username" data-checkbox="false" data-radio="false"
+							data-align="center" data-visible="false" data-editable="false" data-sortable="false"
+							data-searchable="true">
+						</th>
+						<!--列,32-->
+						<!--列,33-->
+						<th data-checkbox="true" data-radio="false" data-align="center" data-visible="true"
+							data-editable="false" data-sortable="false" data-searchable="true">
+						</th>
+						<!--列,33-->
+						<!--列,34-->
+						<th class="nosort" data-title="用户姓名" data-checkbox="false" data-radio="false"
+							data-align="center" data-visible="true" data-editable="false" data-sortable="false"
+							data-searchable="true" data-field="name">
+						</th>
+						<!--列,34-->
+						<!--列,35-->
+						<th class="nosort" data-title="身份证号码" data-checkbox="false" data-radio="false"
+							data-align="center" data-visible="true" data-editable="false" data-sortable="false"
+							data-searchable="true" data-field="idcardno" >
+						</th>
+						<!--列,35-->
+						<!--列,36-->
+						<th class="nosort" data-title="手机号码" data-checkbox="false" data-radio="false"
+							data-align="center" data-visible="true" data-editable="false" data-sortable="false"
+							data-searchable="true" data-field="tmusername">
+						</th>
+						<!--列,36-->
+						<!--列,37-->
+						<th class="nosort" data-title="是否绑定ukey" data-checkbox="false" data-radio="false"
+							data-align="center" data-visible="true" data-editable="false" data-sortable="false"
+							data-searchable="true" data-field="ukstatus" data-formatter="ukeyTrans">
+						</th>
+						<!--列,37-->
+						<!--列,38-->
+						<th class="nosort" data-title="发送状态" data-checkbox="false" data-radio="false"
+							data-align="center" data-visible="true" data-editable="false" data-sortable="false"
+							data-searchable="true" data-field="passwordstatus" data-formatter="statusTrans">
+						</th>
+						<!--列,38-->
+					</tr>
+				</thead>
+			</table>
+			<!--表格,5-->
+			<!--模态框,9-->
+			<div id="updataApiIframe" name="boxFormApi" class="fade poin-eventModal modal"
+				event-hide="hideModal">
+				<div class="modal-dialog">
+					<div class="modal-content poin-modal" style="margin-top:56px">
+						<div class="modal-header">
+							<a class="close guan" data-dismiss="modal">
+							×
+							</a>
+						</div>
+						<div class="modal-body">
+							<!--表单,9-->
+							<form event-render="loadForm" poin role="form" target="_bank" accept="application/x-www-form-urlencoded"
+								autocomplete="off" class="form-horizontal poin-form" data-loading="false"
+								data-isToken="false" data-sign="false" id="boxForm" name="boxForm">
+								<div class="laybody_pag">
+								修改账户信息
+								</div>
+								<div class="layui-form adtable mgtb50">
+									<div class="col_tr">
+										<div class="col4 text_right">
+											<i class="red_input">
+											*
+											</i>
+										用户姓名：
+										</div>
+										<div class="wd280 float_left">
+											<!--输入框,25-->
+											<input event-render="loadText" event-render="loadText" poin placeholder="请输入姓名"
+												autocomplete="off" type="text" class="form-con" data-decimals="2"
+												data-roundtag="ceil" data-toggle="tooltip" data-placement="top"
+												data-trigger="hover" data-animation="false" data-delay="0" data-html="false"
+												data-selector="false" data-container="false" id="updataName"
+												onfocus="updataNameFocus()" class="updataInput" onblur="updataNameBulr()">
+											<!--输入框,25-->
+											<div id="updatauserName" class="warn">
+											</div>
+										</div>
+									</div>
+									<div class="col_tr">
+										<div class="col4 text_right">
+											<i class="red_input">
+											*
+											</i>
+										身份证号码：
+										</div>
+										<div class="wd280 float_left">
+											<!--输入框,26-->
+											<input event-render="loadText" poin placeholder="请输入身份证号码" autocomplete="off"
+												type="text" class="form-con" data-decimals="2" data-roundtag="ceil"
+												data-toggle="tooltip" data-placement="top" data-trigger="hover"
+												data-animation="false" data-delay="0" data-html="false" data-selector="false"
+												data-container="false" id="updataIDnumber" onblur="updataID()"
+												onfocus="updataIDFocus()" class="updataInput" maxlength="18">
+											<!--输入框,26-->
+											<div id="IDtext" class="warn">
+											</div>
+										</div>
+									</div>
+									<div class="col_tr" style="display:none">
+										<div class="col4 text_right">
+											<i class="red_input">
+											*
+											</i>
+										手机号码：
+										</div>
+										<div class="wd280 float_left">
+											<!--输入框,27-->
+											<input event-render="loadText" poin placeholder="请输入..." autocomplete="off"
+												type="text" class="form-con" data-decimals="2" data-roundtag="ceil"
+												data-toggle="tooltip" data-placement="top" data-trigger="hover"
+												data-animation="false" data-delay="0" data-html="false" data-selector="false"
+												data-container="false" id="Username" onblur="updataphone()"
+												onfocus="updataFocus()" class="updataInput" maxlength="11">
+											<!--输入框,27-->
+											<div id="phoneText" class="warn">
+											</div>
+										</div>
+									</div>
+									<div class="col_tr" style="text-align: center;">
+										<div class="warn" id="updataTishi">
+										</div>
+										<!--按钮,47-->
+										<button poin value="button" type="button" class="btn7 btn-primary btn"
+											autocomplete="off" style="margin-right:8%" onclick="updataYes()"
+											id="updataTab">
+										确定
+										</button>
+										<!--按钮,47-->
+										<!--按钮,48-->
+										<button poin value="button" type="button" class="btn7 btn-primary btn"
+											autocomplete="off" onclick="updataNo()">
+										取消
+										</button>
+										<!--按钮,48-->
+									</div>
+								</div>
+							</form>
+							<!--表单,9-->
+						</div>
+						<div class="modal-footer">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--模态框,9-->
+		</div>
+	</div>
+	<!--模态框,10-->
+	<div id="addApiIframe" name="boxFormApi" class="fade poin-eventModal modal"
+		event-hide="hideModal">
+		<div class="modal-dialog">
+			<div class="modal-content poin-modal" style="margin-top:56px">
+				<div class="modal-header">
+					<a class="close guan" data-dismiss="modal">
+					×
+					</a>
+				</div>
+				<div class="modal-body">
+					<!--表单,10-->
+					<form event-render="loadForm" poin role="form" target="_bank" accept="application/x-www-form-urlencoded"
+						autocomplete="off" class="form-horizontal poin-form" data-loading="false"
+						data-isToken="false" data-sign="false" id="boxFormApi" name="boxFormApi">
+						<div class="laybody_pag">
+						填写账户信息
+						</div>
+						<div class="layui-form adtable mgtb50">
+							<div class="col_tr">
+								<div class="col4 text_right">
+									<i class="red_input">
+									*
+									</i>
+								用户姓名：
+								</div>
+								<div class="wd280 float_left">
+									<!--输入框,28-->
+									<input event-render="loadText" poin placeholder="请输入姓名" autocomplete="off"
+										type="text" class="form-con" data-decimals="2" data-roundtag="ceil"
+										data-toggle="tooltip" data-placement="top" data-trigger="hover"
+										data-animation="false" data-delay="0" data-html="false" data-selector="false"
+										data-container="false" id="name" onfocus="addUserName()" name="name"
+										class="addInput" onblur="addName()">
+									<!--输入框,28-->
+									<div id="addName" class="warn">
+									</div>
+								</div>
+							</div>
+							<div class="col_tr">
+								<div class="col4 text_right">
+									<i class="red_input">
+									*
+									</i>
+								身份证号码：
+								</div>
+								<div class="wd280 float_left">
+									<!--输入框,29-->
+									<input event-render="loadText" poin placeholder="请输入身份证号码" autocomplete="off"
+										type="text" class="form-con" data-decimals="2" data-roundtag="ceil"
+										data-toggle="tooltip" data-placement="top" data-trigger="hover"
+										data-animation="false" data-delay="0" data-html="false" data-selector="false"
+										data-container="false" onblur="IDnumberBlur()" id="idcardno" onfocus="IdFocus()"
+										name="idcardno" class="addInput" maxlength="18">
+									<!--输入框,29-->
+									<div id="addIdText" class="warn">
+									</div>
+								</div>
+							</div>
+							<div class="col_tr">
+								<div class="col4 text_right">
+									<i class="red_input">
+									*
+									</i>
+								手机号码：
+								</div>
+								<div class="wd280 float_left">
+									<!--输入框,30-->
+									<input event-render="loadText" poin placeholder="请输入手机号码" autocomplete="off"
+										type="text" class="form-con" data-decimals="2" data-roundtag="ceil"
+										data-toggle="tooltip" data-placement="top" data-trigger="hover"
+										data-animation="false" data-delay="0" data-html="false" data-selector="false"
+										data-container="false" onblur="phone()" id="username" onfocus="phoneFocus()"
+										name="username" class="addInput" maxlength="11">
+									<!--输入框,30-->
+									<div id="addPhoneText" class="warn">
+									</div>
+								</div>
+							</div>
+							<div class="col_tr" style="text-align: center;">
+								<!--按钮,49-->
+								<div class="warn" id="tishi">
+								</div>
+								<button poin value="button" type="button" class="btn7 btn-primary btn"
+									autocomplete="off" style="margin-right:8%" onclick="submitForm()"
+									id="addTab">
+								确定
+								</button>
+								<!--按钮,49-->
+								<!--按钮,50-->
+								<button poin value="button" type="button" class="btn7 btn-primary btn"
+									autocomplete="off" onclick="closeBox()">
+								取消
+								</button>
+								<!--按钮,50-->
+							</div>
+						</div>
+					</form>
+					<!--表单,10-->
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框,10-->
+</body>
+<script>
+	//关闭模态框时清空输入框和提示信息
+	$(".guan").on('click',function(){
+			$(".addInput").val("");
+			$(".updataInput").val("");
+			$(".warn").html("");
+	})
+		layui.use(['form', 'layedit', 'laydate', 'laypage', 'layer', 'element'], function() {
+			var laydate = layui.laydate;
+			laydate.render({
+				elem: '#test1,#test2',
+				theme: 'molv'
+			});
+		});
+		$(function() {
+			slidemenu(".drop-menu-effect");
+			//$('.layout_body').jScrollPane();
+		});
+
+		function slidemenu(_this) {
+			$(_this).each(function() {
+				var $this = $(this);
+				var theMenu = $this.find(".submenu");
+				var tarHeight = theMenu.height();
+				theMenu.css({
+					height: 0
+				});
+				$this.hover(
+					function() {
+						$(this).addClass("hover_menu");
+						theMenu.stop().show().animate({
+							height: tarHeight
+						}, 400);
+					},
+					function() {
+						$(this).removeClass("hover_menu");
+						theMenu.stop().animate({
+							height: 0
+						}, 400, function() {
+							$(this).css({
+								display: "none"
+							});
+						});
+					}
+				);
+			});
+		}
+	</script>
+
+</html>
